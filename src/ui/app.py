@@ -9,10 +9,25 @@ from __future__ import annotations
 
 import csv
 import json
+import os
+import sys
 from pathlib import Path
 from typing import Any
 
+# Ensure repository root is on sys.path so 'src' can be imported in any deployment environment
+_PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
 import streamlit as st
+
+# Forward Streamlit secrets to os.environ if running on Streamlit Cloud
+try:
+    for _key, _val in st.secrets.items():
+        if isinstance(_val, str) and _key not in os.environ:
+            os.environ[_key] = _val
+except Exception:
+    pass
 
 from src.config import Settings, load_settings
 from src.generate.answer import GenerationError
