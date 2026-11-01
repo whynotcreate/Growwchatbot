@@ -1,0 +1,30 @@
+# NextLeap — committed defaults.
+# Secrets and the active LLM model live in .env (see .env.example).
+
+sources:
+  path: sources/urls.csv
+
+embedding:
+  model: sentence-transformers/all-MiniLM-L6-v2
+
+chunking:
+  # structure_aware = one chunk per heading/field block on scheme pages.
+  # max_chars / overlap_chars are the fallback for flat text.
+  strategy: structure_aware
+  max_chars: 1200
+  overlap_chars: 200
+
+chroma:
+  persist_dir: data/chroma
+  collection: hdfc_mf_faq
+
+retrieval:
+  top_k: 5
+  # Minimum similarity (0–1). Hits below this are treated as "not found".
+  min_score: 0.35
+
+llm:
+  provider: groq
+
+prompts:
+  system_id: v1

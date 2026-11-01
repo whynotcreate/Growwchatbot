@@ -1,0 +1,13 @@
+{
+  "query_id": "2fc47301af0b44adb9bc10bdd1ff6ade",
+  "asked_at": "2026-11-01T09:52:22Z",
+  "question": "What is the expense ratio of HDFC Large Cap Fund Direct Growth?",
+  "question_redacted": false,
+  "intent": "factual",
+  "status": "not_found",
+  "top_k": 5,
+  "min_score": 1.0,
+  "hits": [],
+  "citation_url": "https://groww.in/mutual-funds/amc/hdfc-mutual-funds",
+  "last_updated_from_sources": null
+}

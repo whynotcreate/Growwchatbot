@@ -1,0 +1,64 @@
+{
+  "query_id": "9da99fe2eb544f4c8d655c9c6a5462d0",
+  "asked_at": "2026-11-01T08:57:49Z",
+  "question": "Minimum SIP of HDFC Mid Cap",
+  "question_redacted": false,
+  "intent": "factual",
+  "status": "ok",
+  "top_k": 5,
+  "min_score": 0.35,
+  "hits": [
+    {
+      "chunk_id": "hdfc-mid-cap-direct-growth-fact-minimum-sip",
+      "score": 0.8109065890312195,
+      "source_url": "https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth",
+      "section": "Minimum SIP",
+      "text": "HDFC Mid Cap Fund Direct Growth — Minimum SIP: ₹100",
+      "title": "HDFC Mid Cap Fund Direct Growth",
+      "scheme_or_page_id": "hdfc-mid-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:01:03Z"
+    },
+    {
+      "chunk_id": "hdfc-large-cap-direct-growth-fact-minimum-sip",
+      "score": 0.7798169851303101,
+      "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "section": "Minimum SIP",
+      "text": "HDFC Large Cap Fund Direct Growth — Minimum SIP: ₹100",
+      "title": "HDFC Large Cap Fund Direct Growth",
+      "scheme_or_page_id": "hdfc-large-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:00:58Z"
+    },
+    {
+      "chunk_id": "hdfc-flexi-cap-direct-growth-fact-minimum-sip",
+      "score": 0.7540852427482605,
+      "source_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+      "section": "Minimum SIP",
+      "text": "HDFC Flexi Cap Direct Plan Growth — Minimum SIP: ₹100",
+      "title": "HDFC Flexi Cap Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-flexi-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:01:00Z"
+    },
+    {
+      "chunk_id": "hdfc-amc-section-hdfc-mid-cap-fund-direct-growth",
+      "score": 0.6980870962142944,
+      "source_url": "https://groww.in/mutual-funds/amc/hdfc-mutual-funds",
+      "section": "HDFC Mid Cap Fund Direct Growth",
+      "text": "HDFC Mutual Fund\nHDFC Mid Cap Fund Direct Growth\nFund Performance: The fund's annualized returns for the past 3 years & 5 years has been around 15.54% & 17.07%. The HDFC Mid Cap Fund comes under the Equity category of HDFC Mutual Funds.\nMinimum Investment Amount: Lump sum minimum amount for HDFC Mid Cap Fund is ₹100 and for SIP, it is ₹100.\nMin Investment Amt | ₹100\nAUM | ₹1,01,856Cr\n1Y Returns | -2.5%",
+      "title": "HDFC Mutual Fund",
+      "scheme_or_page_id": "hdfc-amc",
+      "fetched_at": "2026-11-01T07:00:56Z"
+    },
+    {
+      "chunk_id": "hdfc-amc-section-hdfc-multi-cap-fund-direct-growth",
+      "score": 0.6807804107666016,
+      "source_url": "https://groww.in/mutual-funds/amc/hdfc-mutual-funds",
+      "section": "HDFC Multi Cap Fund Direct Growth",
+      "text": "HDFC Mutual Fund\nHDFC Multi Cap Fund Direct Growth\nFund Performance: The HDFC Multi Cap Fund comes under the Equity category of HDFC Mutual Funds.\nMinimum Investment Amount: Lump sum minimum amount for HDFC Multi Cap Fund is ₹100 and for SIP, it is ₹100.\nMin Investment Amt | ₹100\nAUM | ₹19,490Cr\n1Y Returns | -9.0%",
+      "title": "HDFC Mutual Fund",
+      "scheme_or_page_id": "hdfc-amc",
+      "fetched_at": "2026-11-01T07:00:56Z"
+    }
+  ],
+  "citation_url": "https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth",
+  "last_updated_from_sources": "2026-11-01"
+}

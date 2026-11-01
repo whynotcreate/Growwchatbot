@@ -1,0 +1,64 @@
+{
+  "query_id": "ab2d6bf839f94bb18f1147c043d12aa4",
+  "asked_at": "2026-11-01T09:45:01Z",
+  "question": "What is the expense ratio of HDFC Large Cap Fund Direct Growth?",
+  "question_redacted": false,
+  "intent": "factual",
+  "status": "ok",
+  "top_k": 5,
+  "min_score": 0.35,
+  "hits": [
+    {
+      "chunk_id": "hdfc-large-cap-direct-growth-fact-expense-ratio",
+      "score": 0.9451959729194641,
+      "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "section": "Expense Ratio",
+      "text": "HDFC Large Cap Fund Direct Growth — Expense Ratio: 1.02%",
+      "title": "HDFC Large Cap Fund Direct Growth",
+      "scheme_or_page_id": "hdfc-large-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:00:58Z"
+    },
+    {
+      "chunk_id": "hdfc-mid-cap-direct-growth-fact-expense-ratio",
+      "score": 0.931807816028595,
+      "source_url": "https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth",
+      "section": "Expense Ratio",
+      "text": "HDFC Mid Cap Fund Direct Growth — Expense Ratio: 0.74%",
+      "title": "HDFC Mid Cap Fund Direct Growth",
+      "scheme_or_page_id": "hdfc-mid-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:01:03Z"
+    },
+    {
+      "chunk_id": "hdfc-large-cap-direct-growth-fact-riskometer",
+      "score": 0.8001240491867065,
+      "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "section": "Riskometer",
+      "text": "HDFC Large Cap Fund Direct Growth — Riskometer: Very High Risk",
+      "title": "HDFC Large Cap Fund Direct Growth",
+      "scheme_or_page_id": "hdfc-large-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:00:58Z"
+    },
+    {
+      "chunk_id": "hdfc-amc-section-hdfc-large-cap-fund-direct-growth",
+      "score": 0.7900615334510803,
+      "source_url": "https://groww.in/mutual-funds/amc/hdfc-mutual-funds",
+      "section": "HDFC Large Cap Fund Direct Growth",
+      "text": "HDFC Mutual Fund\nHDFC Large Cap Fund Direct Growth\nFund Performance: The fund's annualized returns for the past 3 years & 5 years has been around 8.76% & 9.57%. The HDFC Large Cap Fund comes under the Equity category of HDFC Mutual Funds.\nMinimum Investment Amount: Lump sum minimum amount for HDFC Large Cap Fund is ₹100 and for SIP, it is ₹100.\nMin Investment Amt | ₹100\nAUM | ₹37,293Cr\n1Y Returns | -7.3%",
+      "title": "HDFC Mutual Fund",
+      "scheme_or_page_id": "hdfc-amc",
+      "fetched_at": "2026-11-01T07:00:56Z"
+    },
+    {
+      "chunk_id": "hdfc-large-cap-direct-growth-section-about-hdfc-large-cap-fund-direct-growth",
+      "score": 0.7896016240119934,
+      "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "section": "About HDFC Large Cap Fund Direct Growth",
+      "text": "HDFC Large Cap Fund Direct Growth\nAbout HDFC Large Cap Fund Direct Growth\nHDFC Large Cap Fund Direct Growth is a Equity Mutual Fund Scheme launched by HDFC Mutual Fund. This scheme was made available to investors on 10 Dec 1999. Rahul Baijal is the Current Fund Manager of HDFC Large Cap Fund Direct Growth fund. The fund currently has an Asset Under Management(AUM) of ₹9,34,076 Cr and the Latest NAV as of 30 Oct 2026 is ₹1,164.95. The HDFC Large Cap Fund Direct Growth is rated Very High risk. Minimum SIP Investment is set to ₹100. Minimum Lumpsum Investment is ₹100. Exit load of 1% if redeemed within 1 year ;\n#### Investment Objective\nThe scheme seeks to provide long-term capital appreciation/income by investing predominantly in Large-Cap companies.\nFund benchmark NIFTY 100 Total Return Index\nScheme Information Document(SID)",
+      "title": "HDFC Large Cap Fund Direct Growth",
+      "scheme_or_page_id": "hdfc-large-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:00:58Z"
+    }
+  ],
+  "citation_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+  "last_updated_from_sources": "2026-11-01"
+}

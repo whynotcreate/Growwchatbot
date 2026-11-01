@@ -1,0 +1,64 @@
+{
+  "query_id": "e912493ed48f4714a2f01685830b5c80",
+  "asked_at": "2026-11-01T08:57:41Z",
+  "question": "Expense ratio of HDFC Large Cap Direct Growth",
+  "question_redacted": false,
+  "intent": "factual",
+  "status": "ok",
+  "top_k": 5,
+  "min_score": 0.35,
+  "hits": [
+    {
+      "chunk_id": "hdfc-large-cap-direct-growth-fact-expense-ratio",
+      "score": 0.8947245478630066,
+      "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "section": "Expense Ratio",
+      "text": "HDFC Large Cap Fund Direct Growth — Expense Ratio: 1.02%",
+      "title": "HDFC Large Cap Fund Direct Growth",
+      "scheme_or_page_id": "hdfc-large-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:00:58Z"
+    },
+    {
+      "chunk_id": "hdfc-mid-cap-direct-growth-fact-expense-ratio",
+      "score": 0.8590565323829651,
+      "source_url": "https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth",
+      "section": "Expense Ratio",
+      "text": "HDFC Mid Cap Fund Direct Growth — Expense Ratio: 0.74%",
+      "title": "HDFC Mid Cap Fund Direct Growth",
+      "scheme_or_page_id": "hdfc-mid-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:01:03Z"
+    },
+    {
+      "chunk_id": "hdfc-flexi-cap-direct-growth-fact-expense-ratio",
+      "score": 0.7946582436561584,
+      "source_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+      "section": "Expense Ratio",
+      "text": "HDFC Flexi Cap Direct Plan Growth — Expense Ratio: 0.75%",
+      "title": "HDFC Flexi Cap Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-flexi-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:01:00Z"
+    },
+    {
+      "chunk_id": "hdfc-large-cap-direct-growth-fact-riskometer",
+      "score": 0.7912539839744568,
+      "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "section": "Riskometer",
+      "text": "HDFC Large Cap Fund Direct Growth — Riskometer: Very High Risk",
+      "title": "HDFC Large Cap Fund Direct Growth",
+      "scheme_or_page_id": "hdfc-large-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:00:58Z"
+    },
+    {
+      "chunk_id": "hdfc-large-cap-direct-growth-fact-exit-load",
+      "score": 0.7675791382789612,
+      "source_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+      "section": "Exit Load",
+      "text": "HDFC Large Cap Fund Direct Growth — Exit Load: 1% if redeemed within 1 year",
+      "title": "HDFC Large Cap Fund Direct Growth",
+      "scheme_or_page_id": "hdfc-large-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:00:58Z"
+    }
+  ],
+  "citation_url": "https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth",
+  "last_updated_from_sources": "2026-11-01"
+}

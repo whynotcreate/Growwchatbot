@@ -1,0 +1,64 @@
+{
+  "query_id": "5ae2d759ac8745be86f3fc981e1b6103",
+  "asked_at": "2026-11-01T08:57:49Z",
+  "question": "Exit load of HDFC Flexi Cap",
+  "question_redacted": false,
+  "intent": "factual",
+  "status": "ok",
+  "top_k": 5,
+  "min_score": 0.35,
+  "hits": [
+    {
+      "chunk_id": "hdfc-flexi-cap-direct-growth-fact-exit-load",
+      "score": 0.7115731239318848,
+      "source_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+      "section": "Exit Load",
+      "text": "HDFC Flexi Cap Direct Plan Growth — Exit Load: 1% if redeemed within 1 year",
+      "title": "HDFC Flexi Cap Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-flexi-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:01:00Z"
+    },
+    {
+      "chunk_id": "hdfc-flexi-cap-direct-growth-section-exit-load",
+      "score": 0.6772247552871704,
+      "source_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+      "section": "Exit Load",
+      "text": "HDFC Flexi Cap Direct Plan Growth\nExit Load\n01 Jan 2013\nExit load of 1% if redeemed within 1 year",
+      "title": "HDFC Flexi Cap Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-flexi-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:01:00Z"
+    },
+    {
+      "chunk_id": "hdfc-flexi-cap-direct-growth-fact-riskometer",
+      "score": 0.6342308521270752,
+      "source_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+      "section": "Riskometer",
+      "text": "HDFC Flexi Cap Direct Plan Growth — Riskometer: Very High Risk",
+      "title": "HDFC Flexi Cap Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-flexi-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:01:00Z"
+    },
+    {
+      "chunk_id": "hdfc-flexi-cap-direct-growth-fact-expense-ratio",
+      "score": 0.6139549016952515,
+      "source_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+      "section": "Expense Ratio",
+      "text": "HDFC Flexi Cap Direct Plan Growth — Expense Ratio: 0.75%",
+      "title": "HDFC Flexi Cap Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-flexi-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:01:00Z"
+    },
+    {
+      "chunk_id": "hdfc-flexi-cap-direct-growth-fact-minimum-sip",
+      "score": 0.6018097996711731,
+      "source_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+      "section": "Minimum SIP",
+      "text": "HDFC Flexi Cap Direct Plan Growth — Minimum SIP: ₹100",
+      "title": "HDFC Flexi Cap Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-flexi-cap-direct-growth",
+      "fetched_at": "2026-11-01T07:01:00Z"
+    }
+  ],
+  "citation_url": "https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth",
+  "last_updated_from_sources": "2026-11-01"
+}
