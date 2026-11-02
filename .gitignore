@@ -18,5 +18,9 @@ venv/
 .idea/
 .vscode/
 
+# Database temporary files
+*.sqlite3-wal
+*.sqlite3-shm
+
 # Pipeline artifacts under data/ are inspectable demo deliverables
 # (architecture.md §4), so they are intentionally not ignored.

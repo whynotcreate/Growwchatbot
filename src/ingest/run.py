@@ -78,8 +78,15 @@ def run_pipeline(
     failed_scrapes = [r for r in scrape_results if r.outcome == "failed"]
     print(f"Scrape completed: {fetched} fetched, {skipped} skipped, {len(failed_scrapes)} failed.")
 
-    if failed_scrapes and refresh:
-        print(f"Warning: {len(failed_scrapes)} page(s) failed during refresh.")
+    if failed_scrapes:
+        failed_ids = [r.doc_id for r in failed_scrapes]
+        error_msg = (
+            f"Scrape failed for {len(failed_scrapes)} source(s): {failed_ids}. "
+            "Aborting pipeline before loading, chunking, embedding or indexing. "
+            "Existing ChromaDB database has been preserved."
+        )
+        print(f"ERROR: {error_msg}")
+        raise RuntimeError(error_msg)
 
     # Stage 2: Load
     print("\n[2/5] Cleaning and loading HTML documents...")
