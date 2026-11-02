@@ -14,10 +14,12 @@ from src.query import answer_question
 from src.ui.app import (
     EXAMPLE_QUESTIONS,
     check_chroma_status,
+    get_admin_passcode,
     get_chunk_files,
     get_latest_retrieval_trace,
     get_loaded_files,
     render_inspection_dashboard,
+    verify_admin_access,
 )
 
 
@@ -124,3 +126,44 @@ def test_groq_failure_raises_generation_error_when_key_missing():
                 settings=settings,
             )
         assert "GROQ_API_KEY is not set" in str(exc_info.value)
+
+
+def test_admin_access_denied_when_no_passcode_configured():
+    """Verify admin access is rejected when ADMIN_PASSCODE is not set."""
+    is_valid, msg = verify_admin_access("some_password", None)
+    assert is_valid is False
+    assert "disabled" in msg.lower()
+
+    is_valid_empty, msg_empty = verify_admin_access("some_password", "   ")
+    assert is_valid_empty is False
+    assert "disabled" in msg_empty.lower()
+
+
+def test_admin_access_denied_when_incorrect_passcode():
+    """Verify incorrect passcode is rejected."""
+    is_valid, msg = verify_admin_access("wrong_pass", "secret123")
+    assert is_valid is False
+    assert "invalid passcode" in msg.lower()
+
+
+def test_admin_access_allowed_when_correct_passcode():
+    """Verify correct passcode grants access."""
+    is_valid, msg = verify_admin_access("secret123", "secret123")
+    assert is_valid is True
+    assert "successful" in msg.lower()
+
+
+def test_url_parameters_cannot_bypass_authentication(monkeypatch):
+    """Verify URL parameters like ?admin=true do not grant authentication."""
+    # Ensure ADMIN_PASSCODE is not set
+    monkeypatch.delenv("ADMIN_PASSCODE", raising=False)
+    configured = get_admin_passcode()
+    assert configured is None
+
+    # Even if someone attempts 'admin', 'true', or anything else, verification fails
+    is_valid, _ = verify_admin_access("true", configured)
+    assert is_valid is False
+
+    is_valid_admin, _ = verify_admin_access("admin", configured)
+    assert is_valid_admin is False
+

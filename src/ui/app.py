@@ -87,6 +87,38 @@ def check_chroma_status(settings: Settings) -> tuple[bool, int, str]:
         return (False, 0, f"Unavailable: {exc}")
 
 
+def get_admin_passcode() -> str | None:
+    """Retrieve configured ADMIN_PASSCODE from environment or Streamlit Secrets."""
+    val = os.getenv("ADMIN_PASSCODE")
+    if val and val.strip():
+        return val.strip()
+    try:
+        secret_val = st.secrets.get("ADMIN_PASSCODE")
+        if secret_val and str(secret_val).strip():
+            return str(secret_val).strip()
+    except Exception:
+        pass
+    return None
+
+
+def verify_admin_access(
+    input_passcode: str | None, configured_passcode: str | None
+) -> tuple[bool, str]:
+    """Validate input passcode against configured ADMIN_PASSCODE.
+
+    Returns (is_authenticated, status_message).
+    URL query parameters cannot bypass or grant authentication.
+    """
+    if not configured_passcode or not configured_passcode.strip():
+        return False, "Admin access is disabled. Configure ADMIN_PASSCODE in secrets/environment to enable."
+    if not input_passcode or not input_passcode.strip():
+        return False, "Please enter a passcode."
+    import hmac
+    if hmac.compare_digest(input_passcode.strip(), configured_passcode.strip()):
+        return True, "Authentication successful."
+    return False, "Invalid passcode."
+
+
 def render_inspection_dashboard(settings: Settings, chroma_count: int) -> None:
     """Render developer/admin RAG pipeline inspection dashboard."""
     st.divider()
@@ -251,35 +283,40 @@ def main() -> None:
 
     settings = load_settings()
 
-    # --- Admin / Developer Mode Detection ---
-    # Can be toggled via ?admin=true query parameter or via the sidebar expander
-    query_admin = st.query_params.get("admin", "").lower() in ("true", "1", "yes")
-    is_admin = query_admin or st.session_state.get("admin_mode", False)
+    # --- Secure Admin / Developer Mode Authentication ---
+    # URL query parameters (?admin=true) are not an authentication mechanism and cannot grant access.
+    # Access strictly requires entering the secret ADMIN_PASSCODE.
+    configured_passcode = get_admin_passcode()
+    is_admin = bool(st.session_state.get("admin_authenticated", False))
 
-    # --- Sidebar: Clean brand info + Discreet Admin Access ---
+    # --- Sidebar: Clean brand info + Secure Admin Access ---
     with st.sidebar:
         st.markdown("### NextLeap")
         st.caption("Facts-Only HDFC Mutual Fund Assistant")
         st.markdown("---")
         if is_admin:
-            st.success("🛠️ Admin Mode Active")
-            if st.button("Exit Admin Mode", use_container_width=True):
-                if "admin" in st.query_params:
-                    del st.query_params["admin"]
-                st.session_state["admin_mode"] = False
+            st.success("🔒 Admin Mode Active")
+            if st.button("Log Out of Admin", use_container_width=True):
+                st.session_state["admin_authenticated"] = False
                 st.rerun()
         else:
             with st.expander("Admin Access"):
-                admin_pass = st.text_input(
-                    "Passcode:", type="password", key="admin_pwd_input"
-                )
-                if st.button("Unlock Dashboard", key="btn_unlock_admin", use_container_width=True):
-                    expected_pass = os.getenv("ADMIN_PASSCODE", "admin")
-                    if admin_pass == expected_pass:
-                        st.session_state["admin_mode"] = True
-                        st.rerun()
-                    else:
-                        st.error("Invalid passcode.")
+                if not configured_passcode:
+                    st.info(
+                        "Admin access is currently disabled.\n\n"
+                        "Configure `ADMIN_PASSCODE` in Streamlit Secrets or environment variables to enable."
+                    )
+                else:
+                    admin_pass = st.text_input(
+                        "Passcode:", type="password", key="admin_pwd_input"
+                    )
+                    if st.button("Unlock Dashboard", key="btn_unlock_admin", use_container_width=True):
+                        valid, msg = verify_admin_access(admin_pass, configured_passcode)
+                        if valid:
+                            st.session_state["admin_authenticated"] = True
+                            st.rerun()
+                        else:
+                            st.error(msg)
 
     # --- Customer-Facing Interface Header (PRD §10, implementation.md) ---
     st.title("📈 NextLeap: Mutual Fund FAQ Assistant")
@@ -373,7 +410,7 @@ def main() -> None:
                 st.caption("📅 Last updated from sources: N/A")
 
     # --- Developer / Admin Inspection Dashboard ---
-    # Only displayed when admin mode is activated (via ?admin=true or sidebar passcode)
+    # Only displayed when admin mode is authenticated via validated ADMIN_PASSCODE
     if is_admin:
         render_inspection_dashboard(settings, chroma_count)
 
