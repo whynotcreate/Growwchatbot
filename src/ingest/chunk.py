@@ -658,30 +658,21 @@ def write_chunks(path: Path, chunks: list[dict[str, str]]) -> None:
             handle.write(json.dumps(ordered, ensure_ascii=False) + "\n")
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        description="Chunk loaded documents into data/chunks/."
-    )
-    parser.parse_args(argv)
+def chunk_all(
+    loaded_dir: Path, chunks_dir: Path, settings: Settings
+) -> tuple[int, int, int]:
+    """Chunk all documents from loaded_dir into chunks_dir.
 
-    settings = load_settings()
-    loaded_dir = settings.project_root / "data" / "loaded"
-    chunks_dir = settings.project_root / "data" / "chunks"
-
+    Returns (written_docs, total_chunks, failed_docs).
+    """
     if not loaded_dir.is_dir():
-        print(f"Loaded directory not found: {loaded_dir}")
-        return 1
+        raise FileNotFoundError(f"Loaded directory not found: {loaded_dir}")
 
     paths = sorted(loaded_dir.glob("*.json"))
     if not paths:
-        print(f"No loaded documents in {loaded_dir}")
-        return 1
+        raise FileNotFoundError(f"No loaded documents found in {loaded_dir}")
 
     chunks_dir.mkdir(parents=True, exist_ok=True)
-    print(
-        f"Chunking {len(paths)} document(s) from {loaded_dir} -> {chunks_dir}"
-    )
-
     total = 0
     written = 0
     failed = 0
@@ -708,9 +699,28 @@ def main(argv: list[str] | None = None) -> int:
             total += kept
             written += 1
             print(f"  ok   {document['doc_id']}: {kept} chunk(s) -> {output_path.name}")
-        except Exception as exc:  # keep one bad document from stopping the rest
+        except Exception as exc:
             failed += 1
             print(f"  fail {path.name}: {type(exc).__name__}: {exc}")
+
+    return written, total, failed
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Chunk loaded documents into data/chunks/."
+    )
+    parser.parse_args(argv)
+
+    settings = load_settings()
+    loaded_dir = settings.project_root / "data" / "loaded"
+    chunks_dir = settings.project_root / "data" / "chunks"
+
+    try:
+        written, total, failed = chunk_all(loaded_dir, chunks_dir, settings)
+    except FileNotFoundError as exc:
+        print(str(exc))
+        return 1
 
     print(
         f"Done: {written} document(s) written, {total} chunk(s), {failed} failed"
