@@ -87,109 +87,10 @@ def check_chroma_status(settings: Settings) -> tuple[bool, int, str]:
         return (False, 0, f"Unavailable: {exc}")
 
 
-def main() -> None:
-    st.set_page_config(
-        page_title="NextLeap — Mutual Fund FAQ Assistant",
-        page_icon="📈",
-        layout="wide",
-    )
-
-    settings = load_settings()
-
-    # --- Header & UX Copy (PRD §10, implementation.md) ---
-    st.title("📈 NextLeap: Mutual Fund FAQ Assistant")
-    st.info("⚠️ **Facts-only. No investment advice.**")
-    st.markdown(
-        "Ask factual questions about the listed HDFC Mutual Fund schemes. "
-        "Answers come from official public pages and always include a source link."
-    )
-
-    # Check ChromaDB readiness
-    chroma_ok, chroma_count, chroma_status_desc = check_chroma_status(settings)
-    if not chroma_ok:
-        st.warning(
-            "⚠️ **ChromaDB index is empty or unavailable.**\n\n"
-            f"Status: {chroma_status_desc}\n\n"
-            "Please run the ingestion pipeline to build the index:\n"
-            "```bash\npython -m src.ingest.run\n```"
-        )
-
-    # --- Example Questions (Click-to-fill) ---
-    st.write("##### Example Questions (click to fill):")
-    cols = st.columns(len(EXAMPLE_QUESTIONS))
-    for idx, question_text in enumerate(EXAMPLE_QUESTIONS):
-        with cols[idx]:
-            if st.button(question_text, key=f"btn_ex_{idx}", use_container_width=True):
-                st.session_state["question_input"] = question_text
-                st.session_state["auto_submit"] = True
-
-    # User input
-    current_value = st.session_state.get("question_input", "")
-    user_query = st.text_input(
-        "Your Question:",
-        value=current_value,
-        key="query_text_box",
-        placeholder="e.g. What is the exit load of HDFC Large Cap Fund Direct Growth?",
-    )
-
-    submit_clicked = st.button("Submit Question", type="primary")
-    auto_submit = st.session_state.pop("auto_submit", False)
-
-    if submit_clicked or auto_submit:
-        active_query = user_query.strip()
-        if not active_query:
-            st.warning("Please enter a question to ask.")
-        elif not chroma_ok and chroma_count == 0:
-            st.error(
-                "Cannot execute query: ChromaDB is empty. "
-                "Please run ingestion first using `python -m src.ingest.run`."
-            )
-        else:
-            with st.spinner("Processing question through safety, retrieval, and generation..."):
-                try:
-                    result = answer_question(active_query, settings=settings)
-                    st.session_state["last_result"] = result
-                    st.session_state["last_error"] = None
-                except GenerationError as exc:
-                    st.session_state["last_result"] = None
-                    st.session_state["last_error"] = (
-                        f"LLM Generation Error: {exc}\n\n"
-                        "Note: Ensure GROQ_API_KEY and LLM_MODEL are set in your `.env` file."
-                    )
-                except Exception as exc:
-                    st.session_state["last_result"] = None
-                    st.session_state["last_error"] = f"Query Pipeline Error ({type(exc).__name__}): {exc}"
-
-    # Display Answer / Result
-    if st.session_state.get("last_error"):
-        st.error(st.session_state["last_error"])
-
-    last_res = st.session_state.get("last_result")
-    if last_res:
-        st.markdown("### Answer")
-        refused = bool(last_res.get("refused"))
-        reason = last_res.get("refusal_reason")
-
-        if refused:
-            st.warning(f"🛡️ **Refusal Policy Triggered ({reason or 'safety'})**")
-            st.markdown(last_res.get("text", ""))
-            citation = last_res.get("citation_url")
-            if citation:
-                st.markdown(f"**Official Educational Page:** [{citation}]({citation})")
-        else:
-            st.success(last_res.get("text", ""))
-            citation = last_res.get("citation_url")
-            if citation:
-                st.markdown(f"🔗 **Citation:** [{citation}]({citation})")
-            updated = last_res.get("last_updated_from_sources")
-            if updated:
-                st.caption(f"📅 Last updated from sources: {updated}")
-            else:
-                st.caption("📅 Last updated from sources: N/A")
-
-    # --- Demo Tabs: Inspectable RAG Artifacts (architecture.md §8) ---
+def render_inspection_dashboard(settings: Settings, chroma_count: int) -> None:
+    """Render developer/admin RAG pipeline inspection dashboard."""
     st.divider()
-    st.subheader("🛠️ RAG Pipeline Inspection (Demo)")
+    st.subheader("🛠️ RAG Pipeline Inspection (Admin / Developer)")
     tab_docs, tab_chunks, tab_index, tab_trace = st.tabs([
         "📄 Loaded Docs",
         "🧩 Chunks",
@@ -339,6 +240,142 @@ def main() -> None:
 
             with st.expander("Raw Trace JSON"):
                 st.json(trace_data)
+
+
+def main() -> None:
+    st.set_page_config(
+        page_title="NextLeap — Mutual Fund FAQ Assistant",
+        page_icon="📈",
+        layout="wide",
+    )
+
+    settings = load_settings()
+
+    # --- Admin / Developer Mode Detection ---
+    # Can be toggled via ?admin=true query parameter or via the sidebar expander
+    query_admin = st.query_params.get("admin", "").lower() in ("true", "1", "yes")
+    is_admin = query_admin or st.session_state.get("admin_mode", False)
+
+    # --- Sidebar: Clean brand info + Discreet Admin Access ---
+    with st.sidebar:
+        st.markdown("### NextLeap")
+        st.caption("Facts-Only HDFC Mutual Fund Assistant")
+        st.markdown("---")
+        if is_admin:
+            st.success("🛠️ Admin Mode Active")
+            if st.button("Exit Admin Mode", use_container_width=True):
+                if "admin" in st.query_params:
+                    del st.query_params["admin"]
+                st.session_state["admin_mode"] = False
+                st.rerun()
+        else:
+            with st.expander("Admin Access"):
+                admin_pass = st.text_input(
+                    "Passcode:", type="password", key="admin_pwd_input"
+                )
+                if st.button("Unlock Dashboard", key="btn_unlock_admin", use_container_width=True):
+                    expected_pass = os.getenv("ADMIN_PASSCODE", "admin")
+                    if admin_pass == expected_pass:
+                        st.session_state["admin_mode"] = True
+                        st.rerun()
+                    else:
+                        st.error("Invalid passcode.")
+
+    # --- Customer-Facing Interface Header (PRD §10, implementation.md) ---
+    st.title("📈 NextLeap: Mutual Fund FAQ Assistant")
+    st.info("⚠️ **Facts-only. No investment advice.**")
+    st.markdown(
+        "Ask factual questions about the listed HDFC Mutual Fund schemes. "
+        "Answers come from official public pages and always include a source link."
+    )
+
+    # Check ChromaDB readiness
+    chroma_ok, chroma_count, chroma_status_desc = check_chroma_status(settings)
+    if not chroma_ok:
+        st.warning(
+            "⚠️ **ChromaDB index is empty or unavailable.**\n\n"
+            f"Status: {chroma_status_desc}\n\n"
+            "Please run the ingestion pipeline to build the index:\n"
+            "```bash\npython -m src.ingest.run\n```"
+        )
+
+    # --- Example Questions (Click-to-fill) ---
+    st.write("##### Example Questions (click to fill):")
+    cols = st.columns(len(EXAMPLE_QUESTIONS))
+    for idx, question_text in enumerate(EXAMPLE_QUESTIONS):
+        with cols[idx]:
+            if st.button(question_text, key=f"btn_ex_{idx}", use_container_width=True):
+                st.session_state["question_input"] = question_text
+                st.session_state["auto_submit"] = True
+
+    # User input
+    current_value = st.session_state.get("question_input", "")
+    user_query = st.text_input(
+        "Your Question:",
+        value=current_value,
+        key="query_text_box",
+        placeholder="e.g. What is the exit load of HDFC Large Cap Fund Direct Growth?",
+    )
+
+    submit_clicked = st.button("Submit Question", type="primary")
+    auto_submit = st.session_state.pop("auto_submit", False)
+
+    if submit_clicked or auto_submit:
+        active_query = user_query.strip()
+        if not active_query:
+            st.warning("Please enter a question to ask.")
+        elif not chroma_ok and chroma_count == 0:
+            st.error(
+                "Cannot execute query: ChromaDB is empty. "
+                "Please run ingestion first using `python -m src.ingest.run`."
+            )
+        else:
+            with st.spinner("Processing question through safety, retrieval, and generation..."):
+                try:
+                    result = answer_question(active_query, settings=settings)
+                    st.session_state["last_result"] = result
+                    st.session_state["last_error"] = None
+                except GenerationError as exc:
+                    st.session_state["last_result"] = None
+                    st.session_state["last_error"] = (
+                        f"LLM Generation Error: {exc}\n\n"
+                        "Note: Ensure GROQ_API_KEY and LLM_MODEL are set in your `.env` file or Streamlit Secrets."
+                    )
+                except Exception as exc:
+                    st.session_state["last_result"] = None
+                    st.session_state["last_error"] = f"Query Pipeline Error ({type(exc).__name__}): {exc}"
+
+    # Display Answer / Result (Customer-facing)
+    if st.session_state.get("last_error"):
+        st.error(st.session_state["last_error"])
+
+    last_res = st.session_state.get("last_result")
+    if last_res:
+        st.markdown("### Answer")
+        refused = bool(last_res.get("refused"))
+        reason = last_res.get("refusal_reason")
+
+        if refused:
+            st.warning(f"🛡️ **Refusal Policy Triggered ({reason or 'safety'})**")
+            st.markdown(last_res.get("text", ""))
+            citation = last_res.get("citation_url")
+            if citation:
+                st.markdown(f"**Official Educational Page:** [{citation}]({citation})")
+        else:
+            st.success(last_res.get("text", ""))
+            citation = last_res.get("citation_url")
+            if citation:
+                st.markdown(f"🔗 **Citation:** [{citation}]({citation})")
+            updated = last_res.get("last_updated_from_sources")
+            if updated:
+                st.caption(f"📅 Last updated from sources: {updated}")
+            else:
+                st.caption("📅 Last updated from sources: N/A")
+
+    # --- Developer / Admin Inspection Dashboard ---
+    # Only displayed when admin mode is activated (via ?admin=true or sidebar passcode)
+    if is_admin:
+        render_inspection_dashboard(settings, chroma_count)
 
 
 if __name__ == "__main__":

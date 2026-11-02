@@ -17,7 +17,13 @@ from src.ui.app import (
     get_chunk_files,
     get_latest_retrieval_trace,
     get_loaded_files,
+    render_inspection_dashboard,
 )
+
+
+def test_inspection_dashboard_function_exists():
+    """Verify inspection dashboard renderer is available and callable."""
+    assert callable(render_inspection_dashboard)
 
 
 def test_example_questions_defined():
