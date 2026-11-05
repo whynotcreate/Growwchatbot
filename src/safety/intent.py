@@ -76,6 +76,21 @@ _ADVICE_PATTERNS = tuple(
         r"(?:buy|sell|invest|switch|redeem)\b",
         r"\bworth\s+(?:investing|buying)\b",
         r"\bwhich\s+(?:fund|scheme)\s+should\s+(?:i|we)\b",
+        # "Which is better/best?" is a recommendation request, not a fact.
+        r"\bwhich\s+(?:one\s+)?(?:is\s+)?(?:better|best|worse|worst)\b",
+        # "Suggest a fund", "help me choose/pick a scheme".
+        r"\bsuggest(?:s|ed|ing)?\b|\bsuggestion\b",
+        r"\b(?:help|assist)\s+(?:me\s+)?(?:to\s+)?"
+        r"(?:choose|pick|select|decide)\b",
+        # "Is now a good time to invest?"
+        r"\bis\s+(?:now\s+)?(?:a\s+)?(?:good|right)\s+(?:time|idea)\s+to\s+"
+        r"(?:buy|sell|hold|invest)\b",
+        # "Is this fund a good/safe option?" is a suitability opinion.
+        r"\b(?:is|are)\s+[^.?!]{0,50}\b(?:a\s+)?"
+        r"(?:good|suitable|right|safe|better|best)\s+"
+        r"(?:fund|scheme|investment|option|choice)\b",
+        r"\b(?:is|are)\s+[^.?!]{0,50}\b(?:fund|scheme)\b[^.?!]{0,15}\b"
+        r"(?:good|suitable|right|safe|better|best)\b",
     )
 )
 
@@ -90,10 +105,14 @@ _PERFORMANCE_PATTERNS = tuple(
         r"\bperformed\b",
         r"\boutperform(?:ed|ing|s)?\b",
         r"\bbeat(?:en)?\b",
-        r"\bcompare\b|\bcomparison\b",
+        # Only refuse comparisons that involve performance/return language;
+        # comparing expense ratio or exit load is a factual question.
+        r"\b(?:compare|comparing|comparison)\b[^.?!]{0,60}\b"
+        r"(?:returns?|cagr|xirr|performance|nav)\b",
         r"\bwhich\b[^.?!]{0,40}\b(?:fund|scheme)\b[^.?!]{0,40}\b"
         r"(?:better|best|worst)\b",
         r"\b(?:better|best|worst)\b[^.?!]{0,30}\b(?:fund|scheme)\b",
+        r"\b(?:fund|scheme)\b[^.?!]{0,25}\b(?:better|best|worst)\b",
         r"\btop\s+performing\b",
         r"\bnav\s+history\b",
         r"\b(?:1|3|5|10)\s*-?\s*year\s+returns?\b",
@@ -116,8 +135,13 @@ _OUT_OF_CORPUS_PATTERNS = tuple(
         r"\bhdfc\s+bank\b|\bfixed\s+deposit\b",
         r"\blog\s?in\b|\bsign\s?in\b|\bpassword\b|\baccount\s+balance\b",
         r"\bpredict\b[^.?!]{0,30}\bnav\b|\bfuture\s+nav\b",
+        r"\bnav\s+(?:prediction|forecast)\b|\b(?:predict|prediction|forecast)\b"
+        r"[^.?!]{0,20}\bnav\b",
         r"\bnext\s+(?:week|month|year)\b[^.?!]{0,30}\bnav\b",
-        r"\bguaranteed\b|\bassured\s+returns?\b",
+        r"\bguarantee(?:d|s)?\b|\bassured\s+returns?\b",
+        # Market/NAV prediction is outside a facts-only corpus.
+        r"\bwill\b[^.?!]{0,40}\b(?:market|sensex|nifty|nav|fund|scheme)\b"
+        r"[^.?!]{0,30}\b(?:go\s+up|go\s+down|rise|fall|increase|decrease|crash)\b",
     )
 )
 
@@ -185,10 +209,12 @@ def classify_intent(question: str) -> Intent:
         return "pii"
     if _matches(question, _ADVICE_PATTERNS):
         return "advice"
-    if _is_performance(question):
-        return "performance"
+    # Other-AMC / market-prediction / guarantee questions are outside the
+    # HDFC-only corpus, even when they also mention returns.
     if _matches(question, _OUT_OF_CORPUS_PATTERNS):
         return "out_of_corpus"
+    if _is_performance(question):
+        return "performance"
     return "factual"
 
 

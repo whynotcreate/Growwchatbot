@@ -83,6 +83,9 @@ BLOCK_TAGS = {
 # sidebars). This catches navigation that is not wrapped in <nav>.
 MIN_LINK_BLOCK_CHARS = 200
 LINK_DENSITY_THRESHOLD = 0.85
+# A wrapper can have high link density because it contains a footer while still
+# holding a short FAQ answer. Keep it when this much non-link prose survives.
+MIN_PROSE_CHARS = 80
 
 
 @dataclass(frozen=True)
@@ -128,7 +131,11 @@ def _prune_link_heavy(
     min_chars: int = MIN_LINK_BLOCK_CHARS,
     threshold: float = LINK_DENSITY_THRESHOLD,
 ) -> None:
-    """Drop link-only blocks while keeping the surrounding content."""
+    """Drop link-only blocks while keeping the surrounding content.
+
+    The check uses non-link prose, not raw link density, so a page wrapper
+    holding a short answer plus a large footer is not deleted wholesale.
+    """
     for child in list(element.children):
         if not isinstance(child, Tag):
             continue
@@ -137,8 +144,13 @@ def _prune_link_heavy(
             continue
         text = _normalize(child.get_text(" ", strip=True))
         if len(text) >= min_chars and _link_density(child) >= threshold:
-            child.decompose()
-            continue
+            linked = sum(
+                len(_normalize(link.get_text(" ", strip=True)))
+                for link in child.find_all("a")
+            )
+            if len(text) - linked < MIN_PROSE_CHARS:
+                child.decompose()
+                continue
         _prune_link_heavy(child, min_chars=min_chars, threshold=threshold)
 
 

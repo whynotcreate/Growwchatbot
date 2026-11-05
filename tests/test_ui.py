@@ -94,7 +94,12 @@ def test_advice_refusal():
     ans = answer_question("Should I buy HDFC Mid Cap?")
     assert ans["refused"] is True
     assert ans["refusal_reason"] == "advice"
-    assert "https://groww.in/mutual-funds/amc/hdfc-mutual-funds" in ans["citation_url"]
+    # Refusals point to one official educational page from the source list.
+    assert ans["citation_url"].startswith("https://")
+    assert any(
+        domain in ans["citation_url"]
+        for domain in ("groww.in", "sebi.gov.in", "amfiindia.com", "mutualfundssahihai.com")
+    )
 
 
 def test_pii_refusal():
@@ -104,18 +109,19 @@ def test_pii_refusal():
     assert ans["refusal_reason"] == "pii"
 
 
-def test_forced_empty_retrieval():
+def test_forced_empty_retrieval(tmp_path):
     """Verify min_score=1.0 triggers deterministic not-found response without LLM."""
     ans = answer_question(
         "What is the expense ratio of HDFC Large Cap Fund Direct Growth?",
         min_score=1.0,
+        retrieval_dir=tmp_path,
     )
     assert ans["refused"] is False
     assert "couldn't find" in ans["text"].lower()
     assert ans["citation_url"] == "https://groww.in/mutual-funds/amc/hdfc-mutual-funds"
 
 
-def test_groq_failure_raises_generation_error_when_key_missing():
+def test_groq_failure_raises_generation_error_when_key_missing(tmp_path):
     """Verify missing GROQ_API_KEY raises GenerationError without faking an answer."""
     # Ensure GROQ_API_KEY is not in settings
     settings = load_settings()
@@ -124,6 +130,7 @@ def test_groq_failure_raises_generation_error_when_key_missing():
             answer_question(
                 "What is the expense ratio of HDFC Large Cap Fund Direct Growth?",
                 settings=settings,
+                retrieval_dir=tmp_path,
             )
         assert "GROQ_API_KEY is not set" in str(exc_info.value)
 

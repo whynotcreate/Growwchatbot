@@ -1,0 +1,64 @@
+{
+  "query_id": "f41d52035bb1445ba75f48705f74665e",
+  "asked_at": "2026-11-05T11:18:28Z",
+  "question": "How do I download a capital gains statement for my mutual funds?",
+  "question_redacted": false,
+  "intent": "factual",
+  "status": "ok",
+  "top_k": 5,
+  "min_score": 0.35,
+  "hits": [
+    {
+      "chunk_id": "mfsh-capital-gains-section-overview",
+      "score": 0.7945526838302612,
+      "source_url": "https://www.mutualfundssahihai.com/en/how-get-capital-gain-statement-mutual-funds",
+      "section": "Overview",
+      "text": "How to Get Capital Gain Statement for Mutual Funds?\nOverview\nNew to Mutual Funds\nBasics\n1min 45 seconds read\nA mutual fund Capital Gain/Loss Statement is an important document that summarises the profits or losses you've made within a specific period. It provides details on gains or losses, which are crucial for both tax filing and evaluating your investments. Typically, it includes information such as:\n- Asset Class (Equity, Debt or any other category)\n- Type of Gain (long-term or short-term)\n- Transaction Details\n- Net Gain or Loss\nHere's how you can obtain your Capital Gain Statement using different methods:\nMutual Fund Houses\nTo check your capital gains statements for a mutual fund company’s portal:\n> Go to the official website of your mutual fund company.\n> Log in using your user ID or folio number.\n> Download your capital gains report.\nCAMS Portal\nTo access your Capital Gain Statement through CAMS:\n> Visit www.camsonline.com and accept the terms and conditions.\n> Navigate to 'Services for INVESTORS' and click on 'View More' under Statements.\n> Select 'Capital Gain/Loss Statement.'\n> Fill out the form with your PAN and registered email ID.",
+      "title": "How to Get Capital Gain Statement for Mutual Funds?",
+      "scheme_or_page_id": "mfsh-capital-gains",
+      "fetched_at": "2026-11-05T11:12:02Z"
+    },
+    {
+      "chunk_id": "mfsh-capital-gains-section-overview-03",
+      "score": 0.7692825794219971,
+      "source_url": "https://www.mutualfundssahihai.com/en/how-get-capital-gain-statement-mutual-funds",
+      "section": "Overview",
+      "text": "How to Get Capital Gain Statement for Mutual Funds?\nOverview\n> You'll receive the statement in your email once processed.\nOnline Platforms\nMany investors use various online platforms to manage their mutual fund investments, which often provide easy access to Capital Gain Statements.\nHere’s how you can get yours:\n> Visit the website or app of your chosen online platform and log in.\n> Navigate to the \"Portfolio\" or \"Reports\" section. Look for the option labelled \"Capital Gain Statement.\"\n> Choose the specific financial year or period you're interested in.\n> Once selected, you can typically generate or download the statement in PDF format.\nDisclaimer\nMutual Fund investments are subject to market risks, read all scheme related documents carefully.\nRead More\nI Am Ready to Invest",
+      "title": "How to Get Capital Gain Statement for Mutual Funds?",
+      "scheme_or_page_id": "mfsh-capital-gains",
+      "fetched_at": "2026-11-05T11:12:02Z"
+    },
+    {
+      "chunk_id": "mfsh-capital-gains-section-overview-02",
+      "score": 0.6984086036682129,
+      "source_url": "https://www.mutualfundssahihai.com/en/how-get-capital-gain-statement-mutual-funds",
+      "section": "Overview",
+      "text": "How to Get Capital Gain Statement for Mutual Funds?\nOverview\n> Navigate to 'Services for INVESTORS' and click on 'View More' under Statements.\n> Select 'Capital Gain/Loss Statement.'\n> Fill out the form with your PAN and registered email ID.\n> Choose the financial years you need (up to three consecutive years).\n> Select your mutual fund holdings from the dropdown list or choose 'All Mutual Funds.'\n> Opt for delivery via \"Email an encrypted attachment.\"\n> Set a password for the attachment and submit the form.\n> Receive the encrypted PDF statement in your email, which you can access using the password you set.\nKFintech Portal\nTo access your Capital Gain Statement via Karvy:\n> Visit https://mfs.kfintech.com/mfs/\n> Choose 'Retail Investor' from the Login dropdown menu.\n> Navigate to 'Investor Statement and Report' and select 'Capital Gains Statement.'\n> Choose 'Consolidated Capital Gains Statement.'\n> Fill out the form with your details, select the desired financial years, choose your mutual fund holdings, opt for email delivery with an encrypted attachment, set a password, and submit.\n> You'll receive the statement in your email once processed.\nOnline Platforms",
+      "title": "How to Get Capital Gain Statement for Mutual Funds?",
+      "scheme_or_page_id": "mfsh-capital-gains",
+      "fetched_at": "2026-11-05T11:12:02Z"
+    },
+    {
+      "chunk_id": "groww-elss-tax-proof-80c-section-overview",
+      "score": 0.5373761653900146,
+      "source_url": "https://groww.in/help/my-account/ma-others/where-can-i-get-the-tax-proof-for-section-80c",
+      "section": "Overview",
+      "text": "Customer Support\nOverview\nYou can request your tax proof for Section 80C by downloading the Mutual Fund-ELSS statement.\nSteps to request your ELSS Statement:\n- Go to your profile.\n- Select the 'Reports' option.\n- Under 'Tax', find 'Mutual Fund - Capital Gains'.\n- Choose the financial year and click 'Download'.\nClick the button below to go directly to the 'Reports' section.\nWas the answer helpful?\nREPORTS\nVaishnavi Tech Park, South Tower, 3rd Floor Sarjapur Main Road, Bellandur, Bengaluru – 560103 Karnataka\nContact Us\nDownload the App\n© 2016- 2026 Groww. All rights reserved. Version: 8.1.7\nShare Market\nIndices\nF&O\nMutual Funds\nETFs\nFunds By Groww\nCalculators\nIPO\nMiscellaneous\nInternational Silver Midcap Liquid\nDebt Index Bank Nifty Nifty IT\nEquity Nifty 50 Nifty Metal Nifty Auto\nCommodity Nifty Next 50 Healthcare Groww\nGold Sensex Defence\nWhat is IPO? How to Apply for an IPO\nOpen IPOs What is Grey Market Premium?\nUpcoming IPOs Mainboard IPOs\nClosed IPOs SME IPOs\nIPO Subscription Status IPO Allotment Status\nShow More\nMutual Funds :\nA B C D E F G H I J K L M N O P Q R S T U V W X Y Z Others\nStocks :\nA B C D E F G H I J K L M N O P Q R S T U V W X Y Z Others",
+      "title": "Customer Support",
+      "scheme_or_page_id": "groww-elss-tax-proof-80c",
+      "fetched_at": "2026-11-05T11:11:39Z"
+    },
+    {
+      "chunk_id": "mfsh-scheme-documents-section-overview",
+      "score": 0.46862590312957764,
+      "source_url": "https://www.mutualfundssahihai.com/en/what-are-scheme-related-documents-what-information-do-these-documents-provide",
+      "section": "Overview",
+      "text": "What are the Scheme Related Documents? What information do these documents provide?\nOverview\nNew to Mutual Funds\nMutual Funds Returns\n54 seconds read\nAll mutual fund ads contain a message: “Read all scheme related documents carefully.” What are these documents?\nThere are 3 important documents: Key Information Memorandum (KIM), Scheme Information Document (SID) and Statement of Additional Information (SAI).\nThese are prepared by the Asset Management Company (AMC) about a particular scheme, and submitted to the Securities and Exchange Board of India (SEBI) for approval.\nThe SID has information like:\n- All Fundamental Attributes like Investment Objective and Policies, Asset Allocation Pattern, Fees and Liquidity Provisions.\n- Fund Management Team details\n- All Risk Factors in the scheme as well as risk mitigation mechanisms.\n- Scheme details like load, plans and options, past performance, benchmark.\n- General Unitholder information.\n- Other details like list of AMC branches, Investor Service Centres, Official Points of Acceptance.\nThe SAI has information like:\n- The constitution of the Mutual Funds – Sponsors, Asset Management Company and Trustees.",
+      "title": "What are the Scheme Related Documents? What information do these documents provide?",
+      "scheme_or_page_id": "mfsh-scheme-documents",
+      "fetched_at": "2026-11-05T11:12:09Z"
+    }
+  ],
+  "citation_url": "https://www.mutualfundssahihai.com/en/how-get-capital-gain-statement-mutual-funds",
+  "last_updated_from_sources": "2026-11-05"
+}

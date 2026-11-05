@@ -2,9 +2,9 @@
 
 **Product:** Facts-only RAG FAQ assistant for listed HDFC Mutual Fund pages  
 **Source of truth:** `PRD.md`  
-**Version:** 0.1  
-**Status:** Draft for implementation  
-**Last updated:** 2026-11-01
+**Version:** 0.2  
+**Status:** Implemented prototype  
+**Last updated:** 2026-11-05
 
 ---
 
@@ -14,12 +14,15 @@ This document describes **how** the prototype is built: components, data flow, p
 
 Design constraints from the PRD that shape the architecture:
 
-- Small public corpus (Groww AMC + 4 schemes, expanded to 15–25 official URLs).
+- Small public corpus (Groww AMC + 4 schemes, expanded to 24 official URLs
+  including SEBI, AMFI, and Mutual Funds Sahi Hai).
 - **Inspectable RAG:** persist scrape → load → chunk → embed → index → retrieve → generate.
 - Same embedding model and Chroma collection for ingest and query.
 - LLM, embedder, and vector DB are **config / `.env`**, not hardcoded.
 - Streamlit (or similar) so stage data is visible in a tiny UI.
 - No PII storage, no private APIs, no performance math.
+- HDFC AMC’s own site is excluded because automated requests return HTTP 403;
+  `hdfcamc.com` is a parked domain.
 
 ---
 
@@ -111,36 +114,42 @@ NextLeap/
   architecture.md
   README.md
   config.yaml                 # models, chroma, chunking, top-k, source list path
-  .env                        # keys + LLM_MODEL (not committed)
-  sources/urls.csv            # 15–25 official URLs
+  .env.example                # documented keys/model; .env itself is not committed
+  requirements.txt
+  sources/urls.csv            # 24 official URLs
   data/
     raw/                      # scrape: HTML + fetch meta
     loaded/                   # load: cleaned document JSON
     chunks/                   # chunk jsonl
     embeddings/               # embed dump (not Chroma)
-    chroma/                   # vector DB persist
-    retrieval/                # retrieve traces (not generation)
+    chroma/                   # committed vector DB persist
+    retrieval/                # per-query retrieval traces
   src/
     config.py                 # load yaml + env
+    query.py                  # safety → retrieval → generation entry point
     ingest/
-      scrape.py            # HTTP → data/raw only
-      load.py              # data/raw → data/loaded only
-      chunk.py
-      embed.py             # data/chunks → data/embeddings only
-      index.py             # embeddings + chunks → Chroma only
+      scrape.py               # sources/urls.csv → data/raw only
+      load.py                 # data/raw → data/loaded only
+      chunk.py                # structure-aware chunks
+      embedder.py             # single MiniLM loader used by ingest + query
+      embed.py                # data/chunks → data/embeddings only
+      index.py                # embeddings + chunks → Chroma only
+      chroma_client.py        # shared Chroma helpers
+      run.py                  # full offline pipeline
     retrieve/
       search.py
     generate/
-      providers/              # groq.py + stubs for gemini, openai, anthropic, mistral
+      providers/groq.py       # v1 provider adapter
       prompt.py
       answer.py
     safety/
       pii.py
-      intent.py               # facts vs advice vs performance vs PII
+      intent.py               # factual vs advice vs performance vs PII
     ui/
-      app.py                  # Streamlit
+      app.py                  # Streamlit + protected admin dashboard
   samples/
-    qa.md                     # 5–10 Q&A deliverable
+    qa.md                     # 10 tested Q&A deliverable
+  tests/
 ```
 
 Stage folders under `data/` are the **RAG demo artifacts**. A reviewer should open them without rerunning the pipeline.
@@ -153,11 +162,13 @@ Scrape and load are separate. Scrape does not write cleaned documents. Load does
 
 ### 5.1 Scrape → `data/raw/`
 
-**Input:** `sources/urls.csv`.  
+**Input:** `sources/urls.csv` (24 verified official URLs).  
 **Process:** HTTP GET public pages only. Cache HTML; do not scrape behind login.  
 **Output:** `data/raw/{id}.html` and `data/raw/{id}.meta.json` (`url`, `fetched_at`, `http_status`, `title`, `content_type`, `error`).
 
 **Failure:** non-200 is recorded in meta. Do not write `data/loaded/` here.
+`src.ingest.run` aborts before load/chunk/embed/index if any scrape fails, so a
+partial refresh cannot corrupt the existing Chroma collection.
 
 ### 5.2 Load → `data/loaded/`
 
@@ -189,6 +200,12 @@ Empty extract: skip; do not invent text. Chunking reads this folder only.
 | How-to / educational (statements, ELSS lock-in, factsheet links) | Section chunks; keep procedure steps together |
 
 Do **not** default to a single naive character window for scheme tables.
+
+How-to / educational pages are JS-heavy. The loader keeps a short FAQ answer
+inside a high-link-density wrapper when at least 80 characters of non-link prose
+survive, and the generic chunker drops rendered chunks under 200 characters so
+navigation/“loading” boilerplate does not pollute retrieval. Scheme fact chunks
+are built separately and are exempt from that minimum.
 
 **Every chunk** must include:
 
@@ -342,7 +359,7 @@ Changing embedder, collection, or top-k must not require UI changes.
 | Variable | Use |
 | --- | --- |
 | `GROQ_API_KEY` | v1 generation |
-| `LLM_MODEL` | Groq model id (confirm against Groq catalog; PRD example `qwen/qwen3.8-27b`) |
+| `LLM_MODEL` | Groq model id; `qwen/qwen3.8-27b` verified working for this project on 2026-11-05 |
 | Later | `GOOGLE_API_KEY`, `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `MISTRAL_API_KEY` |
 
 `config.llm.provider` selects the adapter; model name always from env for the active provider.
@@ -366,6 +383,15 @@ streamlit run src/ui/app.py
 ```
 
 Query path does not re-scrape unless the operator runs ingest again. “Last updated from sources” is `fetched_at` from retrieved chunks, not request time.
+
+Current committed build (2026-11-05): **24 documents → 116 chunks → 116
+embeddings → 116 Chroma vectors**.
+
+### Admin inspection
+
+`streamlit run src/ui/app.py` exposes loaded docs, chunks, index status, and the
+latest retrieval trace only after a valid `ADMIN_PASSCODE` is entered. URL query
+parameters cannot unlock it.
 
 ---
 
@@ -444,6 +470,7 @@ If `intent` is PII, **do not** store the original question.
 | Hallucinated numbers | Generate only from chunks; refuse on empty/low retrieval |
 | Stale facts | Persist `fetched_at`; surface as last-updated; re-run ingest to refresh |
 | HTML layout change | Loader records status; chunker is structure-aware but may need selector updates |
+| AMC site blocks automation | HDFC AMC (`hdfcfund.com`) returns HTTP 403; corpus uses verified Groww/SEBI/AMFI/MFSH pages |
 | Citation mismatch | Citation = URL of the supporting chunk, not a generic homepage |
 | PII leak | Gate before disk; retrieval traces store redacted/intent-only on PII |
 | Provider outage | UI error; retrieval still inspectable; no fake answer |

@@ -2,9 +2,9 @@
 
 **Product:** NextLeap — facts-only FAQ assistant for HDFC Mutual Fund schemes  
 **Source of truth:** `Docs/Problemstatement.txt`  
-**Version:** 0.1  
-**Status:** Draft for implementation  
-**Last updated:** 2026-11-01
+**Version:** 0.2  
+**Status:** Implemented prototype  
+**Last updated:** 2026-11-05
 
 ---
 
@@ -63,7 +63,13 @@ Retail users and support/content teams repeatedly ask the same scheme facts. Ans
 
 ## 5. In-scope sources (v1 corpus)
 
-Scrape and store these public Groww pages. Expand the source list to **15–25 URLs** using only official public pages (Groww, HDFC AMC, SEBI, AMFI) as needed for statements, ELSS lock-in rules, and educational refusals.
+Scrape and store the five core Groww pages plus official public pages needed for
+statements, ELSS rules, riskometer education, and refusals. The implemented list
+contains **24 URLs** (15–25 required), all HTTPS and all on Groww, SEBI Investor,
+AMFI, or Mutual Funds Sahi Hai domains. The exact machine-readable list lives in
+`sources/urls.csv` with the schema `doc_id,page_type,title,url`.
+
+### 5.1 Core pages (required)
 
 | # | Page | URL |
 | --- | --- | --- |
@@ -72,6 +78,38 @@ Scrape and store these public Groww pages. Expand the source list to **15–25 U
 | 3 | Flexi Cap — HDFC Flexi Cap Direct Plan Growth | https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth |
 | 4 | ELSS (tax saver) — HDFC ELSS Tax Saver Fund Direct Plan Growth | https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth |
 | 5 | Mid Cap — HDFC Mid Cap Fund Direct Growth | https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth |
+
+### 5.2 Additional official pages (implemented)
+
+| doc_id | Type | Page |
+| --- | --- | --- |
+| `groww-elss-tax-proof-80c` | howto | Groww Help: Tax proof for Section 80C |
+| `groww-elss-statement-download` | howto | Groww Help: Download ELSS tax statement |
+| `groww-cas-from-cams` | howto | Groww Help: Generate CAS from CAMS |
+| `sebi-elss` | educational | SEBI Investor: Guide to ELSS |
+| `sebi-riskometer` | educational | SEBI Investor: Understanding the Riskometer |
+| `sebi-understanding-mf` | educational | SEBI Investor: Understanding Mutual Funds |
+| `sebi-cas` | educational | SEBI Investor: Consolidated Account Statement |
+| `amfi-expense-ratio` | educational | AMFI: Expense Ratio |
+| `mfsh-expenses` | educational | MFSH: Expenses in a mutual fund scheme |
+| `mfsh-exit-load` | educational | MFSH: Exit load |
+| `mfsh-lock-in` | educational | MFSH: Lock-in period |
+| `mfsh-riskometer-derived` | educational | MFSH: How the riskometer is derived |
+| `mfsh-riskometer-levels` | educational | MFSH: Riskometer levels |
+| `mfsh-capital-gains` | educational | MFSH: Capital gain statement |
+| `mfsh-cas` | educational | MFSH: Consolidated Account Statement |
+| `mfsh-factsheet` | factsheet | MFSH: What is a factsheet? |
+| `mfsh-scheme-documents` | educational | MFSH: Scheme-related documents |
+| `mfsh-elss` | educational | MFSH: ELSS tax-saving fund |
+| `mfsh-sip` | educational | MFSH: What is a SIP? |
+
+Mutual Funds Sahi Hai (MFSH) is AMFI’s investor-education initiative and is
+treated as an official AMFI-family source. Exact URLs are in `sources/urls.csv`.
+
+**HDFC AMC’s own website is excluded:** tested `hdfcfund.com` pages return HTTP
+403 (“Access Denied” via Akamai) and `hdfcamc.com` is a parked domain, so neither
+can be verified as a working automated source. Groww’s HDFC AMC/scheme pages and
+the SEBI/AMFI/MFSH pages replace them.
 
 **Public sources only.** No screenshots of app backends. No third-party blogs as citations.
 
@@ -188,7 +226,7 @@ Make swap-outs **config-driven**. Secrets stay in `.env` (never commit keys).
 | Variable | Purpose |
 | --- | --- |
 | `GROQ_API_KEY` | Groq API |
-| `LLM_MODEL` | Default Groq model id (problem statement: Qwen on Groq; exact id from `.env`, e.g. intended `qwen/qwen3.8-27b` — confirm against current Groq catalog) |
+| `LLM_MODEL` | Groq model id; verified working model for this project is `qwen/qwen3.8-27b` (confirm against your own Groq catalog if it is retired) |
 | Optional later | `GOOGLE_API_KEY`, `OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `MISTRAL_API_KEY` |
 
 ### 8.3 LLM providers (v1 vs later)
@@ -211,7 +249,7 @@ Make swap-outs **config-driven**. Secrets stay in `.env` (never commit keys).
 | FR-7 | Refuse / strip PII | No PAN/Aadhaar/accounts/OTP/email/phone stored |
 | FR-8 | Performance questions | No computed returns; factsheet/official link only |
 | FR-9 | Tiny UI | Welcome, 3 examples, facts-only disclaimer |
-| FR-10 | Source list deliverable | 15–25 official URLs in CSV or MD |
+| FR-10 | Source list deliverable | 24 official URLs in `sources/urls.csv` (15–25 required), exact 4-column schema |
 | FR-11 | Provider/model in config/.env | Changing `.env` model does not require code rewrite |
 
 ---
@@ -260,6 +298,9 @@ I only share scheme facts from public pages, not buy/sell or portfolio advice. Y
 ## 13. Known limits (to document in README)
 
 - Corpus is a handful of HDFC pages, not all mutual funds on Groww.
+- HDFC AMC’s own website cannot be scraped automatically: tested `hdfcfund.com`
+  pages returned HTTP 403, and `hdfcamc.com` is a parked domain. The corpus uses
+  Groww, SEBI, AMFI, and MFSH public pages instead.
 - Facts can go stale between scrapes; “Last updated from sources” reflects fetch time, not live NAV.
 - Groww page HTML may change and break extraction.
 - LLM may still hallucinate if retrieval is weak; empty-retrieval must not invent numbers.

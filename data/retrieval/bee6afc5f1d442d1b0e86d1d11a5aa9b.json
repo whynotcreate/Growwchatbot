@@ -1,0 +1,64 @@
+{
+  "query_id": "bee6afc5f1d442d1b0e86d1d11a5aa9b",
+  "asked_at": "2026-11-05T11:18:28Z",
+  "question": "What is a mutual fund factsheet?",
+  "question_redacted": false,
+  "intent": "factual",
+  "status": "ok",
+  "top_k": 5,
+  "min_score": 0.35,
+  "hits": [
+    {
+      "chunk_id": "mfsh-factsheet-section-overview",
+      "score": 0.7113482356071472,
+      "source_url": "https://www.mutualfundssahihai.com/en/what-factsheet",
+      "section": "Overview",
+      "text": "What is a Factsheet?\nOverview\nMore about Mutual Funds\nTypes of Mutual Funds\n55 seconds read\nA factsheet is the most reliable guide an investor can access to get detailed information on a scheme at one go. Have you seen what a monthly report card of a student looks like? It covers not only the academic performance-related aspects of the child but the child’s behavior, participation in extra-curricular activities, attendance, discipline, and everything about the child that you need to know. The report card also shows the child’s performance in comparison with the class average.\nThe same goes with a fund factsheet. It covers important aspects of the fund that every prospective or existing investor must know like investment objective, benchmark, AUM, fund managers , features like options available, minimum investment amount, exit loads applicable, and NAVs of different plans. The factsheet then covers important performance and risk parameters like standard deviation (measure of volatility), beta, Sharpe ratio, expense ratio of different plans, and portfolio turnover for equity funds while duration, average maturity, and portfolio yield are disclosed for debt funds.",
+      "title": "What is a Factsheet?",
+      "scheme_or_page_id": "mfsh-factsheet",
+      "fetched_at": "2026-11-05T11:12:06Z"
+    },
+    {
+      "chunk_id": "mfsh-factsheet-section-overview-02",
+      "score": 0.6759652495384216,
+      "source_url": "https://www.mutualfundssahihai.com/en/what-factsheet",
+      "section": "Overview",
+      "text": "What is a Factsheet?\nOverview\nThe factsheet also shows portfolio holdings for the previous month across sectors and securities. It showcases the fund’s historic performance in comparison to its benchmark and specifies the risk level of the fund. In short, the factsheet provides you with every critical bit of information that you must know as an investor.\nRead More\nI Am Ready to Invest",
+      "title": "What is a Factsheet?",
+      "scheme_or_page_id": "mfsh-factsheet",
+      "fetched_at": "2026-11-05T11:12:06Z"
+    },
+    {
+      "chunk_id": "mfsh-scheme-documents-section-overview",
+      "score": 0.6162837147712708,
+      "source_url": "https://www.mutualfundssahihai.com/en/what-are-scheme-related-documents-what-information-do-these-documents-provide",
+      "section": "Overview",
+      "text": "What are the Scheme Related Documents? What information do these documents provide?\nOverview\nNew to Mutual Funds\nMutual Funds Returns\n54 seconds read\nAll mutual fund ads contain a message: “Read all scheme related documents carefully.” What are these documents?\nThere are 3 important documents: Key Information Memorandum (KIM), Scheme Information Document (SID) and Statement of Additional Information (SAI).\nThese are prepared by the Asset Management Company (AMC) about a particular scheme, and submitted to the Securities and Exchange Board of India (SEBI) for approval.\nThe SID has information like:\n- All Fundamental Attributes like Investment Objective and Policies, Asset Allocation Pattern, Fees and Liquidity Provisions.\n- Fund Management Team details\n- All Risk Factors in the scheme as well as risk mitigation mechanisms.\n- Scheme details like load, plans and options, past performance, benchmark.\n- General Unitholder information.\n- Other details like list of AMC branches, Investor Service Centres, Official Points of Acceptance.\nThe SAI has information like:\n- The constitution of the Mutual Funds – Sponsors, Asset Management Company and Trustees.",
+      "title": "What are the Scheme Related Documents? What information do these documents provide?",
+      "scheme_or_page_id": "mfsh-scheme-documents",
+      "fetched_at": "2026-11-05T11:12:09Z"
+    },
+    {
+      "chunk_id": "sebi-understanding-mf-section-understanding-mutual-funds-04",
+      "score": 0.6132434606552124,
+      "source_url": "https://investor.sebi.gov.in/understanding_mf.html",
+      "section": "Understanding Mutual Funds",
+      "text": "Understanding Mutual Funds\nUnderstanding Mutual Funds\nStrong regulatory framework: Mutual funds are regulated by SEBI through a strong regulatory framework.\nEND SAMPLE TABLE PORTLET\nEND PAGE CONTENT INNER\nEND PAGE CONTENT BODY\nEND CONTENT BODY\nBEGIN QUICK NAV\nEND QUICK NAV\nBEGIN CORE PLUGINS\nEND CORE PLUGINS\nBEGIN THEME GLOBAL SCRIPTS\nEND THEME GLOBAL SCRIPTS\nBEGIN THEME LAYOUT SCRIPTS\nEND THEME LAYOUT SCRIPTS",
+      "title": "Understanding Mutual Funds",
+      "scheme_or_page_id": "sebi-understanding-mf",
+      "fetched_at": "2026-11-05T11:11:49Z"
+    },
+    {
+      "chunk_id": "sebi-understanding-mf-section-understanding-mutual-funds-02",
+      "score": 0.6057237386703491,
+      "source_url": "https://investor.sebi.gov.in/understanding_mf.html",
+      "section": "Understanding Mutual Funds",
+      "text": "Understanding Mutual Funds\nUnderstanding Mutual Funds\nHandle all the research required to select the underlying investments\nKeep a track of those investments\nMake changes to the portfolio, if required and\nAlso handle the entire administrative job related to the above.\nIt will summarise the performance of the portfolio into a statement and give it to the investor, who gets the complete picture on that one page – known as the account statement\n### Advantages of investing in mutual funds:\nProfessional management of funds: The mutual fund schemes are managed by professional fund managers. They are registered and regulated professionals.\nLow cost: The asset management company charges expenses towards management of the funds as well as paying other professionals that provide other services like fund accounting, custody of securities, auditing, distribution of the schemes, among others. These expenses are capped through regulations by SEBI.\nDiversified portfolio: The schemes must hold a diversified portfolio as mandated through SEBI regulations, except in certain cases.",
+      "title": "Understanding Mutual Funds",
+      "scheme_or_page_id": "sebi-understanding-mf",
+      "fetched_at": "2026-11-05T11:11:49Z"
+    }
+  ],
+  "citation_url": "https://www.mutualfundssahihai.com/en/what-factsheet",
+  "last_updated_from_sources": "2026-11-05"
+}

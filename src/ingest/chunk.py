@@ -40,6 +40,11 @@ LOCK_IN_RE = re.compile(r"(\d+)\s*(?:Y|Years?|Yr)\s*Lock-in", re.I)
 EXIT_LOAD_PREFIX_RE = re.compile(r"^exit load of\s+", re.I)
 BENCHMARK_RE = re.compile(r"^fund benchmark\s+(.+)$", re.I)
 MANAGER_RE = re.compile(r"view details", re.I)
+# JS-rendered educational pages leave short navigation/boilerplate blocks
+# ("Skip to main content", "More details are loading", SEBI page markers).
+# Real prose chunks on these pages are >= 350 chars, so this removes noise
+# without dropping facts. Scheme fact chunks are built separately.
+MIN_GENERIC_CHUNK_CHARS = 200
 
 # Facts are emitted in this order so reruns are deterministic.
 SCHEME_FACT_ORDER = (
@@ -390,6 +395,7 @@ def _section_chunks(
     body: list[str],
     max_chars: int,
     overlap_chars: int,
+    min_chars: int = 0,
 ) -> list[dict[str, str]]:
     title = str(document["title"])
     # Keep the whole rendered chunk (title + section + body) within max_chars.
@@ -398,7 +404,7 @@ def _section_chunks(
     chunks: list[dict[str, str]] = []
     for piece in _split_body(body, body_max_chars, overlap_chars):
         text = _render(title, section, piece)
-        if text:
+        if text and len(text) >= min_chars:
             chunks.append(
                 _make_chunk(
                     document, ids, section=section, text=text, kind="section"
@@ -556,6 +562,7 @@ def _generic_chunks(
                 body=preamble,
                 max_chars=max_chars,
                 overlap_chars=overlap_chars,
+                min_chars=MIN_GENERIC_CHUNK_CHARS,
             )
         )
 
@@ -572,6 +579,7 @@ def _generic_chunks(
                 body=body,
                 max_chars=max_chars,
                 overlap_chars=overlap_chars,
+                min_chars=MIN_GENERIC_CHUNK_CHARS,
             )
         )
     return chunks

@@ -1,0 +1,64 @@
+{
+  "query_id": "ec6b5f3501144abea31efc7895b8972d",
+  "asked_at": "2026-11-05T11:18:28Z",
+  "question": "What is the lock-in period for HDFC ELSS Tax Saver Fund?",
+  "question_redacted": false,
+  "intent": "factual",
+  "status": "ok",
+  "top_k": 5,
+  "min_score": 0.35,
+  "hits": [
+    {
+      "chunk_id": "hdfc-elss-tax-saver-direct-growth-fact-lock-in",
+      "score": 0.802487313747406,
+      "source_url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+      "section": "Lock-in",
+      "text": "HDFC ELSS Tax Saver Fund Direct Plan Growth — Lock-in: 3 years",
+      "title": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-elss-tax-saver-direct-growth",
+      "fetched_at": "2026-11-05T11:11:36Z"
+    },
+    {
+      "chunk_id": "hdfc-elss-tax-saver-direct-growth-section-exit-load",
+      "score": 0.7299461364746094,
+      "source_url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+      "section": "Exit Load",
+      "text": "HDFC ELSS Tax Saver Fund Direct Plan Growth\nExit Load\n01 Jan 2013\n--",
+      "title": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-elss-tax-saver-direct-growth",
+      "fetched_at": "2026-11-05T11:11:36Z"
+    },
+    {
+      "chunk_id": "hdfc-elss-tax-saver-direct-growth-fact-exit-load",
+      "score": 0.7032319903373718,
+      "source_url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+      "section": "Exit Load",
+      "text": "HDFC ELSS Tax Saver Fund Direct Plan Growth — Exit Load: Nil",
+      "title": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-elss-tax-saver-direct-growth",
+      "fetched_at": "2026-11-05T11:11:36Z"
+    },
+    {
+      "chunk_id": "hdfc-elss-tax-saver-direct-growth-fact-expense-ratio",
+      "score": 0.6777085661888123,
+      "source_url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+      "section": "Expense Ratio",
+      "text": "HDFC ELSS Tax Saver Fund Direct Plan Growth — Expense Ratio: 1.20%",
+      "title": "HDFC ELSS Tax Saver Fund Direct Plan Growth",
+      "scheme_or_page_id": "hdfc-elss-tax-saver-direct-growth",
+      "fetched_at": "2026-11-05T11:11:36Z"
+    },
+    {
+      "chunk_id": "mfsh-lock-in-section-overview",
+      "score": 0.6702505946159363,
+      "source_url": "https://www.mutualfundssahihai.com/en/what-is-lock-in-period",
+      "section": "Overview",
+      "text": "What is Lock-in Period in Mutual Funds?\nOverview\nNew to Mutual Funds\nBasics\n1min 37 seconds read\nThere are a few type of mutual funds that impose a ‘lock-in period’ on your investment. These include equity-linked savings schemes (ELSS) , Fixed Maturity Plans (FMP) in debt funds and closed ended mutual funds. A lock-in period refers to the minimum duration for which investors must hold their investment. Investors cannot redeem or sell mutual fund units in that period.",
+      "title": "What is Lock-in Period in Mutual Funds?",
+      "scheme_or_page_id": "mfsh-lock-in",
+      "fetched_at": "2026-11-05T11:11:57Z"
+    }
+  ],
+  "citation_url": "https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth",
+  "last_updated_from_sources": "2026-11-05"
+}

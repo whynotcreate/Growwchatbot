@@ -89,8 +89,8 @@ def load_settings(config_path: str | Path | None = None) -> Settings:
         retrieval_top_k=int(_require(retrieval, "top_k", "retrieval")),
         retrieval_min_score=float(_require(retrieval, "min_score", "retrieval")),
         llm_provider=llm.get("provider", "groq"),
-        llm_model=os.getenv("LLM_MODEL") or None,
-        groq_api_key=os.getenv("GROQ_API_KEY") or None,
+        llm_model=(os.getenv("LLM_MODEL") or "").strip() or None,
+        groq_api_key=(os.getenv("GROQ_API_KEY") or "").strip() or None,
         prompt_system_id=str(prompts.get("system_id", "v1")),
     )
 

@@ -1,0 +1,9 @@
+{
+  "doc_id": "sebi-cas",
+  "source_url": "https://investor.sebi.gov.in/consolidated_account_statement.html",
+  "title": "Consolidated Account Statement",
+  "page_type": "educational",
+  "fetched_at": "2026-11-05T11:11:50Z",
+  "http_status": 200,
+  "text": "BEGIN CONTAINER\nBEGIN CONTENT\nBEGIN CONTENT BODY\nBEGIN PAGE HEAD\nBEGIN PAGE TITLE\n- Home\n- Topic of Interest\n- Consolidated Account Statement\n# Consolidated Account Statement\nEND PAGE TITLE\nEND PAGE HEAD\nBEGIN PAGE CONTENT BODY\nBEGIN PAGE CONTENT INNER\nConsolidated Account Statement (CAS) is a single/ combined account statement which shows the details of transactions made by an investor during a month across all Mutual Funds and also other securities held in their demat account(s).\nIn order to get your CAS, you should update your PAN card number with your depository participant /stock broker.\nPlease watch the videos on CAS: -\n### NSDL CAS - A consolidated view of assets held in demat accounts and Mutual Fund Folios\n### Consolidated Account Statement (CAS)\nEND PAGE CONTENT INNER\nEND PAGE CONTENT BODY\nEND CONTENT BODY\nEND CONTENT\nEND CONTAINER\nBEGIN QUICK NAV\nEND QUICK NAV\nBEGIN CORE PLUGINS\nEND CORE PLUGINS\nBEGIN THEME GLOBAL SCRIPTS\nEND THEME GLOBAL SCRIPTS\nBEGIN THEME LAYOUT SCRIPTS\nEND THEME LAYOUT SCRIPTS"
+}

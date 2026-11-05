@@ -1,6 +1,25 @@
 doc_id,page_type,title,url
-hdfc-amc,amc,HDFC Mutual Fund,https://groww.in/mutual-funds/amc/hdfc-mutual-funds
-hdfc-large-cap-direct-growth,scheme,HDFC Large Cap Fund Direct Growth,https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
-hdfc-flexi-cap-direct-growth,scheme,HDFC Flexi Cap Direct Plan Growth,https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
-hdfc-elss-tax-saver-direct-growth,scheme,HDFC ELSS Tax Saver Fund Direct Plan Growth,https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
-hdfc-mid-cap-direct-growth,scheme,HDFC Mid Cap Fund Direct Growth,https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth
+hdfc-amc,amc,Groww: HDFC Mutual Fund AMC page,https://groww.in/mutual-funds/amc/hdfc-mutual-funds
+hdfc-large-cap-direct-growth,scheme,Groww: HDFC Large Cap Fund Direct Growth,https://groww.in/mutual-funds/hdfc-large-cap-fund-direct-growth
+hdfc-flexi-cap-direct-growth,scheme,Groww: HDFC Flexi Cap Direct Plan Growth,https://groww.in/mutual-funds/hdfc-equity-fund-direct-growth
+hdfc-elss-tax-saver-direct-growth,scheme,Groww: HDFC ELSS Tax Saver Fund Direct Plan Growth,https://groww.in/mutual-funds/hdfc-elss-tax-saver-fund-direct-plan-growth
+hdfc-mid-cap-direct-growth,scheme,Groww: HDFC Mid Cap Fund Direct Growth,https://groww.in/mutual-funds/hdfc-mid-cap-fund-direct-growth
+groww-elss-tax-proof-80c,howto,Groww Help: Tax proof for Section 80C,https://groww.in/help/my-account/ma-others/where-can-i-get-the-tax-proof-for-section-80c
+groww-elss-statement-download,howto,Groww Help: Download ELSS tax statement,https://groww.in/help/mutual-funds/order/how-to-download-tax-statement--for-elss--77
+groww-cas-from-cams,howto,Groww Help: Generate CAS from CAMS,https://groww.in/help/mutual-funds/mf-track-and-switch/how-to-generate-my-consolidated-account-statement--cas--from-the-cams-website--60
+sebi-elss,educational,SEBI Investor: Guide to ELSS,https://investor.sebi.gov.in/elss.html
+sebi-riskometer,educational,SEBI Investor: Understanding the Riskometer,https://investor.sebi.gov.in/riskometer.html
+sebi-understanding-mf,educational,SEBI Investor: Understanding Mutual Funds,https://investor.sebi.gov.in/understanding_mf.html
+sebi-cas,educational,SEBI Investor: Consolidated Account Statement,https://investor.sebi.gov.in/consolidated_account_statement.html
+amfi-expense-ratio,educational,AMFI: Expense Ratio,https://www.amfiindia.com/investor/knowledge-center-info?zoneName=expenseRatio
+mfsh-expenses,educational,Mutual Funds Sahi Hai: Expenses in a mutual fund scheme,https://www.mutualfundssahihai.com/en/what-are-expenses-incurred-mutual-fund-scheme
+mfsh-exit-load,educational,Mutual Funds Sahi Hai: Exit load,https://www.mutualfundssahihai.com/en/there-advantage-investing-funds-exit-load
+mfsh-lock-in,educational,Mutual Funds Sahi Hai: Lock-in period,https://www.mutualfundssahihai.com/en/what-is-lock-in-period
+mfsh-riskometer-derived,educational,Mutual Funds Sahi Hai: How the riskometer is derived,https://www.mutualfundssahihai.com/en/how-riskometer-scheme-derived
+mfsh-riskometer-levels,educational,Mutual Funds Sahi Hai: Riskometer levels,https://www.mutualfundssahihai.com/en/what-riskometer-and-what-are-different-levels
+mfsh-capital-gains,educational,Mutual Funds Sahi Hai: Capital gain statement,https://www.mutualfundssahihai.com/en/how-get-capital-gain-statement-mutual-funds
+mfsh-cas,educational,Mutual Funds Sahi Hai: Consolidated Account Statement,https://www.mutualfundssahihai.com/en/what-cas-consolidated-account-statement
+mfsh-factsheet,factsheet,Mutual Funds Sahi Hai: What is a factsheet?,https://www.mutualfundssahihai.com/en/what-factsheet
+mfsh-scheme-documents,educational,Mutual Funds Sahi Hai: Scheme-related documents,https://www.mutualfundssahihai.com/en/what-are-scheme-related-documents-what-information-do-these-documents-provide
+mfsh-elss,educational,Mutual Funds Sahi Hai: ELSS tax-saving fund,https://www.mutualfundssahihai.com/en/elss-fund-tax-saving-mutual-fund
+mfsh-sip,educational,Mutual Funds Sahi Hai: What is a SIP?,https://www.mutualfundssahihai.com/en/what-is-sip
